@@ -1,32 +1,208 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <router-view />
     </div>
-    <router-view />
-  </div>
 </template>
 
-<style>
+<style lang="postcss">
+html {
+    background-color: rgb(240, 240, 240);
+    
+}
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.2vmax;
+    font-weight: normal;
+}
+</style>
+
+<!-- bootstrap -->
+<style lang="postcss">
+:root {
+    --text-default: rgba(0, 0, 0, 0.9);
+    --text-dimmed: rgba(0, 0, 0, 0.6);
+    --text-invers: rgba(255, 255, 255, 0.9);
+    --text-accent: rgba(25, 71, 147, 0.9);
+    --text-danger: rgba(234, 15, 65, 0.9);
+
+    --bg-screen: rgb(240, 240, 240);
+    --bg-tile: rgb(255, 255, 255);
+    --bg-warn: rgb(255, 172, 51);
+    --bg-error: rgb(234, 15, 65);
+
+    --text-default-dark: rgba(255, 255, 255, 0.9);
+    --text-dimmed-dark: rgba(255, 255, 255, 0.6);
+    --text-invers-dark: rgba(0, 0, 0, 0.9);
+    --text-accent-dark: rgb(255, 172, 51);
+
+    --bg-screen-dark: rgb(27, 27, 27);
+    --bg-tile-dark: rgb(39, 39, 39);
+    --bg-warn-dark: rgb(143, 86, 0);
+    --bg-error-dark: rgb(234, 89, 114);
+
+    --tile-spacing: 0.5rem;
+    --tile-padding: 1rem;
 }
 
-#nav {
-  padding: 30px;
+.dark-mode {
+    --text-default: var(--text-default-dark);
+    --text-dimmed: var(--text-dimmed-dark);
+    --text-invers: var(--text-invers-dark);
+    --text-accent: var(--text-accent-dark);
+
+    --bg-screen: var(--bg-screen-dark);
+    --bg-tile: var(--bg-tile-dark);
+    --bg-warn: var(--bg-warn-dark);
+    --bg-error: var(--bg-error-dark);
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-default: var(--text-default-dark);
+        --text-dimmed: var(--text-dimmed-dark);
+        --text-invers: var(--text-invers-dark);
+        --text-accent: var(--text-accent-dark);
+
+        --bg-screen: var(--bg-screen-dark);
+        --bg-tile: var(--bg-tile-dark);
+        --bg-warn: var(--bg-warn-dark);
+        --bg-error: var(--bg-error-dark);
+    }
+}
+</style>
+<!-- filter -->
+<style lang="postcss">
+filter-grey {
+    filter: contrast(75%) grayscale(1) brightness(150%);
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.filter-fade-tile {
+    mask-image: linear-gradient(
+        black,
+        black calc(100% - var(--tile-padding)),
+        transparent
+    );
+}
+</style>
+<!-- grid -->
+<style lang="postcss">
+.grid {
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-auto-columns: 1fr;
+}
+
+.gap-spacing {
+    grid-gap: var(--tile-spacing);
+}
+
+.gap-padding {
+    grid-gap: var(--tile-padding);
+}
+
+.gap-0 {
+    grid-gap: 0;
+}
+
+.gap-1 {
+    grid-gap: config('padding.1');
+}
+
+.gap-2 {
+    grid-gap: config('padding.2');
+}
+
+.gap-4 {
+    grid-gap: config('padding.4');
+}
+
+.gap-8 {
+    grid-gap: config('padding.8');
+}
+
+.align-self-start {
+    align-self: end;
+}
+
+.align-self-center {
+    align-self: center;
+}
+
+.align-self-end {
+    align-self: end;
+}
+
+.align-content-start {
+    align-content: start;
+}
+
+.align-content-center {
+    align-content: center;
+}
+
+.align-content-end {
+    align-content: end;
+}
+
+.justify-self-start {
+    justify-self: start;
+}
+
+.justify-self-center {
+    justify-self: center;
+}
+
+.justify-self-end {
+    justify-self: end;
+}
+
+.justify-items-start {
+    justify-items: start;
+}
+
+.justify-items-center {
+    justify-items: center;
+}
+
+.justify-items-end {
+    justify-items: end;
+}
+
+.place-center {
+    align-items: center;
+    justify-items: center;
+}
+</style>
+<!-- markup -->
+<style lang="postcss">
+.markup h1 {
+    @apply font-medium;
+    @apply text-sm;
+    @apply tracking-wide;
+    @apply uppercase;
+    @apply text-dimmed;
+}
+
+.markup h2 {
+    @apply font-bold;
+}
+
+.markup li {
+    @apply flex justify-between items-baseline;
+    @apply leading-tight;
+    @apply border-b-2 border-screen;
+    padding: 0.35rem 0;
+}
+
+.markup li:first-child {
+    @apply pt-0;
+}
+
+.markup li:last-child {
+    @apply border-0;
 }
 </style>
