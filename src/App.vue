@@ -5,9 +5,11 @@
 </template>
 
 <style lang="postcss">
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
+
 html {
     background-color: rgb(240, 240, 240);
-    
+    position: relative;
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -19,7 +21,6 @@ html {
     font-weight: normal;
 }
 </style>
-
 <!-- bootstrap -->
 <style lang="postcss">
 :root {
@@ -175,34 +176,5 @@ filter-grey {
 .place-center {
     align-items: center;
     justify-items: center;
-}
-</style>
-<!-- markup -->
-<style lang="postcss">
-.markup h1 {
-    @apply font-medium;
-    @apply text-sm;
-    @apply tracking-wide;
-    @apply uppercase;
-    @apply text-dimmed;
-}
-
-.markup h2 {
-    @apply font-bold;
-}
-
-.markup li {
-    @apply flex justify-between items-baseline;
-    @apply leading-tight;
-    @apply border-b-2 border-screen;
-    padding: 0.35rem 0;
-}
-
-.markup li:first-child {
-    @apply pt-0;
-}
-
-.markup li:last-child {
-    @apply border-0;
 }
 </style>

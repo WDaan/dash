@@ -1,7 +1,7 @@
 <template>
     <div
-        style="height: 100vh;"
-        class="fixed pin grid gap-spacing w-screen h-screen p-spacing font-normal leading-normal text-default bg-screen"
+        style="height: 97vh; padding: 7px;"
+        class="pin grid gap-spacing w-screen h-screen"
         :class="theme"
     >
         <slot></slot>

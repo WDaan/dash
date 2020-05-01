@@ -1,10 +1,7 @@
 <template>
     <Tile :position="position" class="markup">
-        <div
-            class="grid gap-2 justify-items-center h-full"
-            style="grid-template-rows: auto 1fr auto;"
-        >
-            <div class="markup">
+        <div class="markup flex">
+            <div class="m-auto h-screen">
                 <h1>Hi {{ name }}!</h1>
             </div>
         </div>
@@ -22,4 +19,10 @@ export default {
     }
 }
 </script>
-<style></style>
+<style scoped>
+h1 {
+    font-size: 40px;
+    font-weight: 300;
+    font-family: 'Inter', arial, sans-serif;
+}
+</style>

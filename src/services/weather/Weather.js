@@ -3,7 +3,7 @@ import axios from 'axios'
 class Weather {
     async forCity(city) {
         const response = await axios.get(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.OPEN_WEATHER_MAP_KEY}&units=metric`
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${process.env.VUE_APP_OPEN_WEATHER_MAP_KEY}&units=metric`
         )
 
         return response.data

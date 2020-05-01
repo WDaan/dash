@@ -4,8 +4,8 @@
             class="grid gap-2 justify-items-center h-full"
             style="grid-template-rows: auto 1fr auto;"
         >
-            <div class="markup">
-                <h1>{{ date }}</h1>
+            <div>
+                <h1 style="font-size:15px;">{{ date }}</h1>
             </div>
             <div
                 class="align-self-center font-bold text-4xl tracking-wide leading-none"
@@ -15,40 +15,16 @@
             <div class="uppercase">
                 <div
                     class="grid gap-4 items-center"
-                    style="grid-template-columns: repeat(3, auto);"
+                    style="grid-template-columns: repeat(2, auto);"
                 >
-                    <span>
+                    <span style="font-size: 20px">
                         {{ weather.temperature }}°
-                        <span class="text-sm uppercase text-dimmed">out</span>
                     </span>
-                    <span>
-                        <office-temperature />
-                        <span class="text-sm uppercase text-dimmed">in</span>
-                    </span>
-                    <span
-                        v-for="icon in weather.icons"
-                        class="text-2xl"
-                        v-html="icon"
-                        v-bind:key="icon"
-                    ></span>
+
+                    <span style="width: 35px;" v-html="weather.icons[0]"></span>
                 </div>
-                <div class="hidden">{{ weatherCity }}</div>
+                <div class="uppercase mt-4">{{ weatherCity }}</div>
             </div>
-        </div>
-        <div
-            class="absolute pin-b pin-l w-full grid items-end"
-            style="
-                height: calc(1.25 * var(--tile-padding));
-                grid-gap: 1px;
-                grid-template-columns: repeat(12, 1fr);
-                opacity: .15"
-        >
-            <div
-                v-for="rainForecast in rainForecasts"
-                class="rounded-sm bg-accent"
-                :style="`height:${rainForecast.rain * 100}%`"
-                v-bind:key="rainForecast"
-            />
         </div>
     </Tile>
 </template>
@@ -56,8 +32,7 @@
 <script>
 import { emoji } from '../../helpers'
 import Tile from '../Tile'
-import moment from 'moment';
-import 'moment-timezone'
+import moment from 'moment-timezone'
 import weather from '@/services/weather/Weather'
 export default {
     name: 'TimeWeatherTile',
