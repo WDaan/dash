@@ -8,7 +8,8 @@
                 time-zone="Europe/Brussels"
                 weather-city="Gavere"
             ></TimeWeatherTile>
-            <HelloTile name="Daan" position="a2:b2"></HelloTile>
+            <PlexTile position="a2:b2"></PlexTile>
+            <HelloTile name="Daan" position="a3:b3"></HelloTile>
         </Dashboard>
     </div>
 </template>
@@ -17,8 +18,11 @@
 import Dashboard from '@/components/Dashboard'
 import HelloTile from '@/components/Tiles/HelloTile'
 import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
+import PlexTile from '@/components/Tiles/PlexTile'
 export default {
     name: 'Home',
-    components: { Dashboard, HelloTile, TimeWeatherTile }
+    components: { Dashboard, HelloTile, TimeWeatherTile, PlexTile }
 }
 </script>
+
+
