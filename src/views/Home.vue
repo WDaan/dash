@@ -6,26 +6,15 @@
                 position="b1:c1"
                 date-format="ddd DD/MM"
                 time-zone="Europe/Brussels"
-                weather-city="Gavere"
+                weather-city="Gent"
             ></TimeWeatherTile>
-            <PlexTile
-                :host="plex.host"
-                :port="plex.port"
-                :token="plex.token"
-                position="a2"
-            ></PlexTile>
             <TileTimer on="12:00" off="19:00">
                 <TrainTile
-                    position="a3:a4"
+                    position="a2:a3"
                     to="kortrijk"
-                    from="munkzwalm"
+                    from="gent"
                 ></TrainTile>
             </TileTimer>
-            <TrainTile
-                position="b3:c3"
-                to="kortrijk"
-                from="munkzwalm"
-            ></TrainTile>
         </Dashboard>
     </div>
 </template>
@@ -35,7 +24,6 @@ import Dashboard from '@/components/Dashboard'
 import TileTimer from '@/components/TileTimer'
 import HelloTile from '@/components/Tiles/HelloTile'
 import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
-import PlexTile from '@/components/Tiles/PlexTile'
 import TrainTile from '@/components/Tiles/TrainTile'
 
 export default {
@@ -45,8 +33,7 @@ export default {
         TileTimer,
         HelloTile,
         TimeWeatherTile,
-        TrainTile,
-        PlexTile
+        TrainTile
     },
     data() {
         return {

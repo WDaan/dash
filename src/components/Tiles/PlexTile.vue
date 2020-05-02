@@ -10,7 +10,7 @@
             </div>
         </div>
         <div
-            v-if="onlyNumber"
+            v-if="!onlynumber"
             class="mt-3 flex overflow-x-scroll scrolling-touch"
         >
             <div
@@ -56,7 +56,7 @@ export default {
         host: String,
         token: String,
         position: String,
-        onlyNumber: {
+        onlynumber: {
             type: Boolean,
             default: true
         }
@@ -81,7 +81,8 @@ export default {
             this.getNumberOfStreams,
             10000
         )
-        if (!this.onlyNumber) {
+
+        if (!this.onlynumber) {
             this.getViewers()
             this.getViewersInterval = setInterval(this.getViewers, 10000)
         }
