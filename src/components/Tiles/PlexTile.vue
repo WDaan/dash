@@ -1,6 +1,9 @@
 <template>
     <Tile :position="position">
-        <h1>Plex</h1>
+        <h1>
+            Plex
+            <span style="font-size:20px;" class="text-dimmed">{{ name }}</span>
+        </h1>
         <div class="flex">
             <div class="m-auto">
                 <h2>Number of Streams: {{ count }}</h2>
@@ -11,25 +14,35 @@
 
 <script>
 import Tile from '@/components/Tile'
-import plex from '@/services/plex/Plex'
+import Plex from '@/services/plex/Plex'
 export default {
     name: 'PlexTile',
     components: { Tile },
     props: {
+        name: { type: String, default: '' },
+        port: Number,
+        ip: String,
+        token: String,
         position: String
     },
     data() {
         return {
+            plex: null,
             count: 0
         }
     },
     created() {
+        this.plex = new Plex({
+            ip: this.$props.ip,
+            port: this.$props.port,
+            token: this.$props.token
+        })
         this.getNumberOfStreams()
         setInterval(this.getNumberOfStreams, 10000)
     },
     methods: {
         async getNumberOfStreams() {
-            this.count = await plex.getNumberOfStreams()
+            this.count = await this.plex.getNumberOfStreams()
         }
     }
 }
@@ -44,7 +57,7 @@ export default {
 //   }
 //   return viewers
 // }
-// 
+//
 // // get the name of the active plex users
 // function parse_user_info(json, viewers: Viewers): Viewers {
 //   // parse songs

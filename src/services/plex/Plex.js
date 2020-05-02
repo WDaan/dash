@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-class Plex {
+export default class Plex {
+    constructor({ ip, port, token }) {
+        this.url = `http://${ip}:${port}/status/sessions?X-Plex-Token=${token}`
+    }
+
     async getNumberOfStreams() {
-        const response = await axios.get(
-            `http://${process.env.VUE_APP_PLEX_IP}:${process.env.VUE_APP_PLEX_PORT}/status/sessions?X-Plex-Token=${process.env.VUE_APP_PLEX_TOKEN}`
-        )
+        const response = await axios.get(this.url)
 
         return response.data['MediaContainer'].size
     }
 }
-
-export default new Plex()

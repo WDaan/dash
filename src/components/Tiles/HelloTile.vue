@@ -1,7 +1,7 @@
 <template>
-    <Tile :position="position" class="markup">
-        <div class="markup flex">
-            <div class="m-auto h-screen">
+    <Tile :position="position">
+        <div class="flex text-2xl h-full">
+            <div class="text-center m-auto">
                 <h1>Hi {{ name }}!</h1>
             </div>
         </div>
@@ -14,14 +14,16 @@ export default {
     name: 'HelloTile',
     components: { Tile },
     props: {
-        name: String,
+        name: {
+            type: String,
+            default: 'stranger'
+        },
         position: String
     }
 }
 </script>
 <style scoped>
 h1 {
-    font-size: 40px;
     font-weight: 300;
     font-family: 'Inter', arial, sans-serif;
 }

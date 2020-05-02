@@ -8,8 +8,13 @@
                 time-zone="Europe/Brussels"
                 weather-city="Gavere"
             ></TimeWeatherTile>
-            <PlexTile position="a2:b2"></PlexTile>
-            <HelloTile name="Daan" position="a3:b3"></HelloTile>
+            <PlexTile
+                :ip="plex.ip"
+                :port="plex.port"
+                :token="plex.token"
+                position="a2:b2"
+            ></PlexTile>
+            <HelloTile position="a3:b3"></HelloTile>
         </Dashboard>
     </div>
 </template>
@@ -21,8 +26,15 @@ import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
 import PlexTile from '@/components/Tiles/PlexTile'
 export default {
     name: 'Home',
-    components: { Dashboard, HelloTile, TimeWeatherTile, PlexTile }
+    components: { Dashboard, HelloTile, TimeWeatherTile, PlexTile },
+    data() {
+        return {
+            plex: {
+                ip: process.env.VUE_APP_PLEX_IP,
+                port: Number(process.env.VUE_APP_PLEX_PORT),
+                token: process.env.VUE_APP_PLEX_TOKEN
+            }
+        }
+    }
 }
 </script>
-
-
