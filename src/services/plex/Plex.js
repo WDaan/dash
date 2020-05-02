@@ -54,7 +54,6 @@ export default class Plex {
 
     async getViewers() {
         const { data } = await axios.get(this.url)
-        console.log(data)
         if (data.MediaContainer.size > 0)
             return this.parseViewers(data.MediaContainer.Metadata)
     }
