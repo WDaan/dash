@@ -1,5 +1,9 @@
 <template>
-    <div :style="tilePosition" class="tile grid overflow-hidden rounded">
+    <div
+        :style="tilePosition"
+        class="grid overflow-hidden rounded"
+        style="background-color: var(--bg-tile)"
+    >
         <div
             class="overflow-hidden p-3"
             :class="{ 'filter-fade-tile': !noFade }"
@@ -8,13 +12,6 @@
         </div>
     </div>
 </template>
-
-<style lang="postcss" scoped>
-.tile {
-    background-color: rgb(255, 255, 255);
-}
-</style>
-
 <script>
 export default {
     props: {

@@ -41,7 +41,8 @@ export default {
             fromTrains: null,
             toTrains: null,
             fromTrainsApi: null,
-            toTrainsApi: null
+            toTrainsApi: null,
+            getTrainDataInterval: null
         }
     },
     created() {
@@ -49,15 +50,23 @@ export default {
         this.toTrainsApi = new iRail({ from: this.to, to: this.from })
 
         this.getTrainData()
+        this.getTrainDataInterval = setInterval(
+            this.getTrainData,
+            1000 * 60 * 10
+        ) //10minutes
     },
     methods: {
         emoji,
         async getTrainData() {
-            let data = await this.fromTrainsApi.getInfo()
-            this.fromTrains = data.connection
+            try {
+                let data = await this.fromTrainsApi.getInfo()
+                this.fromTrains = data.connection
 
-            data = await this.toTrainsApi.getInfo()
-            this.toTrains = data.connection
+                data = await this.toTrainsApi.getInfo()
+                this.toTrains = data.connection
+            } catch (e) {
+                clearInterval(this.getTrainDataInterval)
+            }
         }
     }
 }
