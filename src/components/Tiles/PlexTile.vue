@@ -6,7 +6,34 @@
         </h1>
         <div class="flex">
             <div class="m-auto">
-                <h2>Number of Streams: {{ count }}</h2>
+                <h2>{{ count }} stream(s)</h2>
+            </div>
+        </div>
+        <div class="mt-3 flex overflow-x-scroll scrolling-touch">
+            <div
+                class="rounded shadow-lg grid mx-1"
+                v-for="v in viewers"
+                v-bind:key="v.name + v.media.name"
+                style="width: 220px; height: 190px;"
+            >
+                <img
+                    style="width: 220px"
+                    class="rounded-t"
+                    :src="v.media.art"
+                />
+                <div v-if="v.media.type == 'movie'" class="px-1 py-2">
+                    <div class="text-base mb-2">{{ v.media.name }}</div>
+                    <p class="text-gray-700 text-xs">
+                        {{ v.name }}
+                    </p>
+                </div>
+                <div v-else class="px-1 py-2">
+                    <div class="text-sm mb-2">{{ v.media.show.name }}</div>
+                    <div class="text-sm mb-2">{{ v.media.show.episode }}</div>
+                    <p class="text-gray-700 text-xs">
+                        {{ v.name }}
+                    </p>
+                </div>
             </div>
         </div>
     </Tile>
@@ -28,10 +55,11 @@ export default {
     data() {
         return {
             plex: null,
-            count: 0
+            count: 0,
+            viewers: []
         }
     },
-    created() {
+    async created() {
         this.plex = new Plex({
             ip: this.$props.ip,
             port: this.$props.port,
@@ -39,112 +67,24 @@ export default {
         })
         this.getNumberOfStreams()
         setInterval(this.getNumberOfStreams, 10000)
+
+        this.getViewers()
     },
     methods: {
         async getNumberOfStreams() {
             this.count = await this.plex.getNumberOfStreams()
+        },
+        async getViewers() {
+            this.viewers = await this.plex.getViewers()
+            console.log(this.viewers)
         }
     }
 }
-
-// // get the number of users, en userdata if necessary
-// function parse_plex_json(json): Viewers {
-//   let viewers = new Viewers()
-//   const num_active_users = json.MediaContainer._attributes.size
-//   viewers.num = num_active_users
-//   if (num_active_users > 0) {
-//     viewers = parse_user_info(json, viewers)
-//   }
-//   return viewers
-// }
-//
-// // get the name of the active plex users
-// function parse_user_info(json, viewers: Viewers): Viewers {
-//   // parse songs
-//   try {
-//     const Tracks = json.MediaContainer.Track
-//     let nTrack = Tracks.length
-//     if (nTrack === undefined) {
-//       nTrack = 1
-//     }
-//     if (nTrack === 1) {
-//       const m = get_maker(Tracks)
-//       const usr = new User(Tracks.User._attributes.title, m)
-//       viewers.add_user(usr)
-//     } else if (nTrack > 1) {
-//       for (let i = 0; i < nTrack; i++) {
-//         const m = get_maker(Tracks[i])
-//         const usr = new User(Tracks[i].User._attributes.title, m)
-//         viewers.add_user(usr)
-//       }
-//     }
-//   } catch (err) {
-//     // console.log('no songs');
-//   }
-
-//   // parse videos
-//   try {
-//     const Videos = json.MediaContainer.Video
-//     let nVideo = Videos.length
-//     if (nVideo === undefined) {
-//       nVideo = 1
-//     }
-//     // console.log("Videos: " + nVideo);
-//     if (nVideo === 1) {
-//       const m = get_maker(Videos)
-//       const usr = new User(Videos.User._attributes.title, m)
-//       viewers.add_user(usr)
-//     } else if (nVideo > 1) {
-//       for (let i = 0; i < nVideo; i++) {
-//         const m = get_maker(Videos[i])
-//         const usr = new User(Videos[i].User._attributes.title, m)
-//         viewers.add_user(usr)
-//       }
-//     }
-//   } catch (err) {
-//     // console.log('no vids');
-//   }
-//   return viewers
-// }
-
-// // get info on the media that's playing
-// function get_maker(info): Media {
-//   let maker: string
-//   let title
-//   let type
-//   switch (info._attributes.type) {
-//     case 'track':
-//       type = 'Music'
-//       maker = info._attributes.grandparentTitle
-//       title = info._attributes.title
-//       break
-//     case 'episode':
-//       type = 'Serie'
-//       maker = info._attributes.grandparentTitle
-//       maker +=
-//         ' (' +
-//         info._attributes.parentTitle.substring(0, 1) +
-//         info._attributes.parentTitle.substring(
-//           info._attributes.parentTitle.length - 2,
-//           info._attributes.parentTitle.length,
-//         ) +
-//         'E' +
-//         info._attributes.index +
-//         ')'
-//       title = info._attributes.title
-//       break
-//     case 'movie':
-//       type = 'Movie'
-//       maker = info._attributes.title
-//       title = ''
-//       break
-//   }
-//   return new Media(type, maker, title)
-// }
 </script>
 <style scoped>
 h1,
-h2 {
+h2,
+h3 {
     font-family: 'Inter', arial, sans-serif;
 }
 
@@ -155,5 +95,9 @@ h1 {
 h2 {
     font-size: 20px;
     font-weight: 300;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 </style>

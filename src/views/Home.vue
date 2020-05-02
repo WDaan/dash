@@ -12,9 +12,9 @@
                 :ip="plex.ip"
                 :port="plex.port"
                 :token="plex.token"
-                position="a2:b2"
+                position="a2:a3"
             ></PlexTile>
-            <HelloTile position="a3:b3"></HelloTile>
+            <HelloTile position="a4:b4"></HelloTile>
         </Dashboard>
     </div>
 </template>
@@ -24,6 +24,7 @@ import Dashboard from '@/components/Dashboard'
 import HelloTile from '@/components/Tiles/HelloTile'
 import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
 import PlexTile from '@/components/Tiles/PlexTile'
+
 export default {
     name: 'Home',
     components: { Dashboard, HelloTile, TimeWeatherTile, PlexTile },
@@ -35,6 +36,7 @@ export default {
                 token: process.env.VUE_APP_PLEX_TOKEN
             }
         }
-    }
+    },
+    async created() {}
 }
 </script>

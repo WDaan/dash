@@ -1,7 +1,7 @@
 <template>
     <div
-        style="height: 97vh; padding: 7px;"
-        class="pin grid gap-spacing w-screen h-screen"
+        style="padding: 7px;"
+        class="grid gap-spacing h-screen p-2"
         :class="theme"
     >
         <slot></slot>

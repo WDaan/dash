@@ -1,7 +1,7 @@
 <template>
     <div :style="tilePosition" class="tile grid overflow-hidden rounded">
         <div
-            class="overflow-hidden p-4"
+            class="overflow-hidden p-3"
             :class="{ 'filter-fade-tile': !noFade }"
         >
             <slot></slot>
