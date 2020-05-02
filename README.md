@@ -21,7 +21,7 @@ Questions? Maybe it's in the [Wiki](https://github.com/WDaan/dash/wiki/)!
   
 ## Installation
 
-Clone this repo, run  'npm install' and configure the wanted Tiles as below inside Home.vue
+Clone this repo, run  'npm install', run 'npm run serve' and configure the wanted Tiles as below inside Home.vue
 
 <p  align="center">
 <a  href="https://imgur.com/bh37Vop.png"><img  src="https://imgur.com/bh37Vop.png"  width="500" ></a>
