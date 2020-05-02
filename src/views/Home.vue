@@ -3,7 +3,7 @@
         <Dashboard theme="">
             <HelloTile name="Daan" position="a1"></HelloTile>
             <TimeWeatherTile
-                position="b1"
+                position="b1:c1"
                 date-format="ddd DD/MM"
                 time-zone="Europe/Brussels"
                 weather-city="Gavere"
@@ -12,15 +12,20 @@
                 :host="plex.host"
                 :port="plex.port"
                 :token="plex.token"
-                position="a2:a3"
+                position="a2"
             ></PlexTile>
             <TileTimer on="12:00" off="19:00">
                 <TrainTile
-                    position="b2:b3"
+                    position="a3:a4"
                     to="kortrijk"
                     from="munkzwalm"
                 ></TrainTile>
             </TileTimer>
+            <TrainTile
+                position="b3:c3"
+                to="kortrijk"
+                from="munkzwalm"
+            ></TrainTile>
         </Dashboard>
     </div>
 </template>

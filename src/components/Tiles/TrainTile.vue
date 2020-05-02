@@ -5,16 +5,18 @@
                 <div class="text-3xl -mt-1" v-html="emoji('🚃')" />
             </div>
         </div>
-        <TrainTilePartial
-            :from="from"
-            :to="to"
-            :trains="fromTrains"
-        ></TrainTilePartial>
-        <TrainTilePartial
-            :from="to"
-            :to="from"
-            :trains="toTrains"
-        ></TrainTilePartial>
+        <div :class="size > 450 ? 'flex flex-row' : ''">
+            <TrainTilePartial
+                :from="from"
+                :to="to"
+                :trains="fromTrains"
+            ></TrainTilePartial>
+            <TrainTilePartial
+                :from="to"
+                :to="from"
+                :trains="toTrains"
+            ></TrainTilePartial>
+        </div>
     </tile>
 </template>
 
@@ -42,7 +44,8 @@ export default {
             toTrains: null,
             fromTrainsApi: null,
             toTrainsApi: null,
-            getTrainDataInterval: null
+            getTrainDataInterval: null,
+            size: 500
         }
     },
     created() {
@@ -54,6 +57,14 @@ export default {
             this.getTrainData,
             1000 * 60 * 10
         ) //10minutes
+
+        window.addEventListener('resize', this.getSize)
+    },
+    destroyed() {
+        window.removeEventListener('resize', this.getSize)
+    },
+    mounted() {
+        this.getSize()
     },
     methods: {
         emoji,
@@ -67,6 +78,9 @@ export default {
             } catch (e) {
                 clearInterval(this.getTrainDataInterval)
             }
+        },
+        getSize() {
+            this.size = this.$el.clientWidth
         }
     }
 }

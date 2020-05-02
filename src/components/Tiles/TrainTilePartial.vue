@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto mt-10">
+    <div class="mx-auto mt-2">
         <h2
             class="uppercase inline-flex"
             style="font-size: 15px; font-weight: 200"

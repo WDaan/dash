@@ -9,7 +9,10 @@
                 <h2>{{ count }} stream(s)</h2>
             </div>
         </div>
-        <div class="mt-3 flex overflow-x-scroll scrolling-touch">
+        <div
+            v-if="onlyNumber"
+            class="mt-3 flex overflow-x-scroll scrolling-touch"
+        >
             <div
                 class="shadow-lg rounded grid mx-2 mb-4"
                 v-for="v in viewers"
@@ -52,7 +55,11 @@ export default {
         port: Number,
         host: String,
         token: String,
-        position: String
+        position: String,
+        onlyNumber: {
+            type: Boolean,
+            default: true
+        }
     },
     data() {
         return {
@@ -74,9 +81,10 @@ export default {
             this.getNumberOfStreams,
             10000
         )
-
-        this.getViewers()
-        this.getViewersInterval = setInterval(this.getViewers, 10000)
+        if (!this.onlyNumber) {
+            this.getViewers()
+            this.getViewersInterval = setInterval(this.getViewers, 10000)
+        }
     },
     methods: {
         async getNumberOfStreams() {
