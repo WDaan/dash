@@ -8,6 +8,7 @@ A minimal, customizable dashboard  made with Vuejs!
 
 > Vue, Tailwind
 
+Questions? Maybe it's in the [Wiki](https://github.com/WDaan/dash/wiki/)!
 
 ## Screenshots
 
@@ -30,6 +31,8 @@ Clone this repo, run  'npm install' and configure the wanted Tiles as below insi
 <p  align="center">
 <a  href="https://https://imgur.com/Y0rxGfi.png"><img  src="https://imgur.com/Y0rxGfi.png"  width="500" ></a>
 </p>
+
+finally, build with 'npm run build' or build with docker & place on the server!
 
 ## Development
 
@@ -59,4 +62,4 @@ I'll gladly accept help/pull requests & advice!
   
 ## Credits 
 
-Dashboard design heavily inspired by: '[https://github.com/spatie/dashboard.spatie.be/tree/vue-websockets](https://github.com/spatie/dashboard.spatie.be/tree/vue-websockets)'
+Dashboard design heavily inspired by: '[Spatie Dashboard](https://github.com/spatie/dashboard.spatie.be/tree/vue-websockets)'

@@ -6,13 +6,13 @@
                 position="b1:c1"
                 date-format="ddd DD/MM"
                 time-zone="Europe/Brussels"
-                weather-city="Gent"
+                weather-city="gavere"
             ></TimeWeatherTile>
             <TileTimer on="12:00" off="19:00">
                 <TrainTile
-                    position="a2:a3"
+                    position="a2:b2"
                     to="kortrijk"
-                    from="gent"
+                    from="Gent"
                 ></TrainTile>
             </TileTimer>
         </Dashboard>
