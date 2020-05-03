@@ -12,7 +12,7 @@
                 </v-list-item>
             </template>
             <v-card>
-                <v-list dense rounded>
+                <v-list v-if="tiles.length > 0" dense rounded>
                     <v-list-item
                         style="display: block; margin: auto;"
                         class="pt-2"
@@ -24,6 +24,9 @@
                         {{ c.tileName }} - {{ c.position }}
                     </v-list-item>
                 </v-list>
+                <div v-else class="pa-4">
+                    <h3 class="subtitle">no tiles on dashboard</h3>
+                </div>
             </v-card>
         </v-dialog>
     </div>
@@ -47,10 +50,13 @@ export default {
     created() {},
     methods: {
         deleteTile(id) {
-            document.getElementById(id).remove()
-            this.$store.commit('DELETE_TILE', { vue: this, tileId: id })
+            // document.getElementById(id).remove()
+            this.$store.commit('DELETE_TILE', id)
 
             this.dialog = false
+
+            //confirmation
+            this.$toast.success('Tile removed successfully!')
         }
     }
 }

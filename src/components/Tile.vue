@@ -2,27 +2,57 @@
     <div
         :style="tilePosition"
         class="grid overflow-hidden rounded"
-        style="background-color: var(--bg-tile)"
+        style="background-color: var(--bg-tile); position:relative"
+        @contextmenu.prevent="$refs.menu.open"
     >
         <div
             class="overflow-hidden p-3"
             :class="{ 'filter-fade-tile': !noFade }"
         >
             <slot></slot>
+            <vue-context ref="menu">
+                <v-card
+                    elevation="20"
+                    width="170"
+                    style="position:absolute; top: 60%;"
+                >
+                    <v-list dense rounded>
+                        <v-list-item
+                            link
+                            @click.prevent="onClick($event.target.innerText)"
+                        >
+                            <v-icon>edit</v-icon>
+                            <v-list-item-title style="font-size:15px">
+                                Edit
+                            </v-list-item-title>
+                        </v-list-item>
+                        <v-list-item link @click.prevent="rightClickDelete(id)">
+                            <v-icon>delete</v-icon>
+                            <v-list-item-title style="font-size:15px">
+                                Delete
+                            </v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </v-card>
+            </vue-context>
         </div>
     </div>
 </template>
 <script>
+import { VueContext } from 'vue-context'
 export default {
     name: 'Tile',
+    components: { VueContext },
     props: {
+        id: Number,
         position: {
             type: String
         },
         noFade: {
             type: Boolean,
             default: false
-        }
+        },
+        vue: this
     },
     computed: {
         tilePosition() {
@@ -49,6 +79,10 @@ export default {
         indexInAlphabet(character) {
             const index = character.toLowerCase().charCodeAt(0) - 96
             return index < 1 ? 1 : index
+        },
+        rightClickDelete(id) {
+            this.$store.commit('DELETE_TILE', id)
+            this.$toast.success('Tile removed successfully!')
         }
     }
 }

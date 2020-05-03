@@ -21,9 +21,8 @@ export default new Vuex.Store({
         ADD_TILE(state, tile) {
             state.tiles.push(tile)
         },
-        DELETE_TILE(state, payload) {
-            state.tiles = state.tiles.filter(el => el.id !== payload.tileId)
-            payload.vue.$toast.success('Tile removed successfully!')
+        DELETE_TILE(state, id) {
+            state.tiles = state.tiles.filter(el => el.TileId !== id)
         },
         REGISTER_TILES(state, tiles) {
             state.availableTiles = [...tiles]

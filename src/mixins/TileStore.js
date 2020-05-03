@@ -7,30 +7,15 @@ import TrainTile from '@/components/Tiles/TrainTile'
 import PlexTile from '@/components/Tiles/PlexTile'
 
 export default {
-    props: { position: String },
-    data() {
-        return {
-            id: null,
-            size: null
-        }
-    },
-    created() {
-        this.id = this._uid
-    },
-    mounted() {
-        window.addEventListener('resize', this.resize)
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.resize)
-    },
     methods: {
-        createComponent(name, props) {
+        createComponent(name, props, store) {
             //require component
             let ComponentClass = this.requireTile(name)
 
             //instantiate
             return new ComponentClass({
-                propsData: props
+                propsData: props,
+                store
             })
         },
         mountComponent(component) {
@@ -54,12 +39,12 @@ export default {
             }
         },
         saveComponentToStore(tile) {
+            console.log(tile)
             //get props
             let props = tile.$options.props
-
             //convert tile to json object
             let state = {
-                id: tile._uid,
+                TileId: tile._data.id,
                 tileName: tile.$options.name
             }
             Object.keys(props).forEach(key => {

@@ -32,14 +32,16 @@ export default {
         }
     },
     mounted() {
-        this.tiles.forEach(tile => {
-            let { tileName } = tile
-            delete tile.tileName
+        if (this.tiles.length) {
+            this.tiles.forEach(tile => {
+                let { tileName } = tile
+                delete tile.tileName
 
-            let instance = this.createComponent(tileName, tile)
+                let instance = this.createComponent(tileName, tile, this.$store)
 
-            this.mountComponent(instance)
-        })
+                this.mountComponent(instance)
+            })
+        }
     }
 }
 </script>

@@ -1,5 +1,5 @@
 export default {
-    props: { position: String },
+    props: { position: String, TileId: Number },
     data() {
         return {
             id: null,
@@ -7,7 +7,7 @@ export default {
         }
     },
     created() {
-        this.id = this._uid
+        this.id = this.TileId ?? this._uid
     },
     mounted() {
         window.addEventListener('resize', this.resize)

@@ -7,12 +7,6 @@
         <v-list dense rounded class="teal accent-4">
             <AddModal></AddModal>
             <DeleteModal></DeleteModal>
-            <v-list-item link>
-                <v-icon class="pr-2 white--text">save</v-icon>
-                <v-list-item-title class="white--text" style="font-size:15px"
-                    >Save Layout</v-list-item-title
-                >
-            </v-list-item>
         </v-list>
     </v-card>
 </template>

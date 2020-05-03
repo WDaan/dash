@@ -108,7 +108,8 @@ export default {
         createComponentFromMenu() {
             let instance = this.createComponent(
                 this.selectedTile,
-                this.formatProps()
+                this.formatProps(),
+                this.$store
             )
 
             this.mountComponent(instance)
