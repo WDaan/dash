@@ -1,5 +1,5 @@
 <template>
-    <Tile :position="position" @resize="getSize">
+    <Tile :id="id" :position="position" @resize="getSize">
         <div v-if="fromTrains && toTrains">
             <div class=" w-10 h-10 rounded-full mx-auto">
                 <div class="text-3xl -mt-1" v-html="emoji('🚃')" />

@@ -9,11 +9,7 @@
             </template>
 
             <v-card>
-                <v-form
-                    @submit.prevent="submit"
-                    class="pa-5 pt-10 mx-auto"
-                    style="max-width: 300px;"
-                >
+                <v-form v-model="valid" class="pa-5 pt-10 mx-auto" style="max-width: 300px;">
                     <v-select
                         :items="options"
                         label="Tile"
@@ -26,6 +22,9 @@
                             <v-text-field
                                 v-if="item.type === 'string'"
                                 v-model="item.value"
+                                :rules="[
+                                    v => !!v || `${item.name} is required`
+                                ]"
                                 required
                                 :label="item.name"
                             ></v-text-field>
@@ -37,7 +36,11 @@
                             ></v-checkbox>
                         </div>
                     </v-container>
-                    <v-btn type="submit" color="teal accent-4 white--text">Add Tile</v-btn>
+                    <v-btn
+                        :disabled="!valid"
+                        @click="createAndMountComponent"
+                        color="teal accent-4 white--text"
+                    >Add Tile</v-btn>
                 </v-form>
             </v-card>
         </v-dialog>
@@ -45,18 +48,34 @@
 </template>
 
 <script>
+import HelloTile from '@/components/Tiles/HelloTile'
+import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
+import TrainTile from '@/components/Tiles/TrainTile'
+import PlexTile from '@/components/Tiles/PlexTile'
+
+import Vue from 'vue'
+//register all components
+const files = require.context('@/components/Tiles', true, /\.vue$/i)
+const components = files.keys().map(
+    key =>
+        key
+            .split('/')
+            .pop()
+            .split('.')[0]
+)
+
 export default {
     data() {
         return {
-            dialog: true,
+            dialog: false,
             options: [],
             schema: [],
-            selectedTile: null
+            selectedTile: null,
+            valid: false
         }
     },
     created() {
-        let comps = this.getAvailableTiles()
-        this.options = [...comps]
+        this.options = [...components]
         this.selectedTile = this.options[0]
         this.createFormSchema(this.selectedTile)
     },
@@ -77,20 +96,40 @@ export default {
                 })
             })
         },
-        getAvailableTiles() {
-            return require
-                .context('@/components/Tiles', true, /\.vue$/i)
-                .keys()
-                .map(
-                    key =>
-                        key
-                            .split('/')
-                            .pop()
-                            .split('.')[0]
-                )
+        createAndMountComponent() {
+            //get props
+            let propsData = {}
+            this.schema.forEach(el => {
+                propsData[el.name] = el.value
+            })
+
+            //require component
+            let ComponentClass = this.requireTile(this.selectedTile)
+
+            //instantiate
+            let instance = new ComponentClass({
+                propsData
+            })
+            instance.$mount()
+            //add to dom
+            document.getElementById('dashboard').appendChild(instance.$el)
+
+            //close dialog
+            this.dialog = false
         },
-        submit() {
-            console.log('submitted!!')
+        requireTile(name) {
+            switch (name) {
+                case 'HelloTile':
+                    return Vue.extend(HelloTile)
+                case 'TimeWeatherTile':
+                    return Vue.extend(TimeWeatherTile)
+                case 'TrainTile':
+                    return Vue.extend(TrainTile)
+                case 'PlexTile':
+                    return Vue.extend(PlexTile)
+                default:
+                    return
+            }
         }
     }
 }

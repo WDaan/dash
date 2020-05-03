@@ -1,5 +1,5 @@
 <template>
-    <Tile :position="position">
+    <Tile :id="id" :position="position">
         <h1>
             Plex
             <span style="font-size:20px;" class="text-dimmed">{{ name }}</span>
