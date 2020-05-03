@@ -51,7 +51,7 @@
                     </v-container>
                     <v-btn
                         :disabled="!valid"
-                        @click="createAndMountComponent"
+                        @click="createComponentFromMenu"
                         color="teal accent-4 white--text"
                         >Add Tile</v-btn
                     >
@@ -104,6 +104,34 @@ export default {
                     value: props[key].default
                 })
             })
+        },
+        createComponentFromMenu() {
+            let instance = this.createComponent(
+                this.selectedTile,
+                this.formatProps()
+            )
+
+            this.mountComponent(instance)
+
+            this.saveComponentToStore(instance)
+
+            //close dialog
+            this.dialog = false
+
+            //reset inputs
+            this.schema = []
+            this.createFormSchema(this.selectedTile)
+
+            //success notification
+            this.$toast.success('Tile added successfully')
+        },
+        formatProps() {
+            let propsData = {}
+            this.schema.forEach(el => {
+                propsData[el.name] = el.value
+            })
+
+            return propsData
         }
     }
 }

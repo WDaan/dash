@@ -24,35 +24,20 @@ export default {
         window.removeEventListener('resize', this.resize)
     },
     methods: {
-        createAndMountComponent() {
-            //get props
-            let propsData = {}
-            this.schema.forEach(el => {
-                propsData[el.name] = el.value
-            })
-
+        createComponent(name, props) {
             //require component
-            let ComponentClass = this.requireTile(this.selectedTile)
+            let ComponentClass = this.requireTile(name)
 
             //instantiate
-            let instance = new ComponentClass({
-                propsData
+            return new ComponentClass({
+                propsData: props
             })
-            instance.$mount()
+        },
+        mountComponent(component) {
+            component.$mount()
+
             //add to dom
-            document.getElementById('dashboard').appendChild(instance.$el)
-
-            this.saveComponentToStore(instance)
-
-            //close dialog
-            this.dialog = false
-
-            //reset inputs
-            this.schema = []
-            this.createFormSchema(this.selectedTile)
-
-            //success notification
-            this.$toast.success('Tile added successfully')
+            document.getElementById('dashboard').appendChild(component.$el)
         },
         requireTile(name) {
             switch (name) {
@@ -69,8 +54,10 @@ export default {
             }
         },
         saveComponentToStore(tile) {
-            console.log(tile)
+            //get props
             let props = tile.$options.props
+
+            //convert tile to json object
             let state = {
                 id: tile._uid,
                 tileName: tile.$options.name

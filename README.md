@@ -21,22 +21,17 @@ Questions? Maybe it's in the [Wiki](https://github.com/WDaan/dash/wiki/)!
   
 ## Installation
 
-Clone this repo, run  'npm install', run 'npm run serve' and configure the wanted Tiles as below inside Home.vue
+npm run build or with docker image 
 
-<p  align="center">
-<a  href="https://imgur.com/bh37Vop.png"><img  src="https://imgur.com/bh37Vop.png"  width="500" ></a>
-</p>
+(more explanation coming soon!)
 
 ### Result
 <p  align="center">
 <a  href="https://https://imgur.com/Y0rxGfi.png"><img  src="https://imgur.com/Y0rxGfi.png"  width="500" ></a>
 </p>
 
-finally, build with 'npm run build' or build with docker & place on the server!
-
 ## Development
 
-  - configure .env
   - Git clone & npm run serve!
 
 ## Available Tiles (so Far)
@@ -51,7 +46,7 @@ finally, build with 'npm run build' or build with docker & place on the server!
 
 - Plex Streams
 
- - NMBS Trains (Belgium only?)
+- NMBS Trains (Belgium only?)
 
 
 
