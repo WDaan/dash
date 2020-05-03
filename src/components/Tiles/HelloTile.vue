@@ -1,5 +1,5 @@
 <template>
-    <Tile :position="position">
+    <Tile :id="id" :position="position">
         <div class="flex text-2xl h-full">
             <div class="text-center m-auto">
                 <h1>Hi {{ name }}!</h1>
@@ -9,14 +9,15 @@
 </template>
 
 <script>
+import Tile from '@/mixins/Tile'
 export default {
     name: 'HelloTile',
+    mixins: [Tile],
     props: {
         name: {
             type: String,
             default: 'stranger'
-        },
-        position: String
+        }
     }
 }
 </script>

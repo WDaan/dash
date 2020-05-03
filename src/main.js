@@ -30,7 +30,7 @@ files.keys().map(key =>
 
 Vue.config.productionTip = false
 
-new Vue({
+window.vue = new Vue({
     router,
     store,
     vuetify,

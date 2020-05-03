@@ -58,7 +58,8 @@ export default {
         position: String,
         onlynumber: {
             type: Boolean,
-            default: true
+            default: true,
+            label: 'Only show number of streams?'
         }
     },
     data() {

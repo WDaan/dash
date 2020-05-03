@@ -1,5 +1,5 @@
 <template>
-    <Tile :position="position" no-fade>
+    <Tile :id="id" :position="position" no-fade>
         <div
             class="grid gap-2 justify-items-center h-full"
             style="grid-template-rows: auto 1fr auto;"
@@ -33,11 +33,14 @@
 import { emoji } from '../../helpers'
 import moment from 'moment-timezone'
 import weather from '@/services/weather/Weather'
+import Tile from '@/mixins/Tile'
 export default {
     name: 'TimeWeatherTile',
+    mixins: [Tile],
     props: {
         weatherCity: {
-            type: String
+            type: String,
+            default: 'Gent'
         },
         dateFormat: {
             type: String,
@@ -48,10 +51,8 @@ export default {
             default: 'HH:mm'
         },
         timeZone: {
-            type: String
-        },
-        position: {
-            type: String
+            type: String,
+            default: 'Europe/Brussels'
         }
     },
     data() {
@@ -67,7 +68,7 @@ export default {
     },
     created() {
         this.refreshTime()
-        setInterval(this.refreshTime, 1000)
+        setInterval(this.refreshTime, 5000)
         this.fetchWeather()
         setInterval(this.fetchWeather, 15 * 60 * 1000)
     },

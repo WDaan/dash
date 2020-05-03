@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Dashboard theme>
+        <Dashboard id="dashboard" theme>
             <HelloTile name="Daan" position="a1:a2"></HelloTile>
             <TimeWeatherTile
                 position="b1:c1"
@@ -8,13 +8,6 @@
                 time-zone="Europe/Brussels"
                 weather-city="gavere"
             ></TimeWeatherTile>
-            <TileTimer on="12:00" off="19:00">
-                <TrainTile
-                    position="a2:b2"
-                    to="kortrijk"
-                    from="Gent"
-                ></TrainTile>
-            </TileTimer>
         </Dashboard>
     </div>
 </template>
