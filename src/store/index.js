@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        tiles: []
+        tiles: [],
+        availableTiles: []
     },
     mutations: {
         ADD_TILE(state, tile) {
@@ -15,11 +16,15 @@ export default new Vuex.Store({
         DELETE_TILE(state, payload) {
             state.tiles = state.tiles.filter(el => el.id !== payload.tileId)
             payload.vue.$toast.success('Tile removed successfully!')
+        },
+        REGISTER_TILES(state, tiles) {
+            state.availableTiles = [...tiles]
         }
     },
     actions: {},
     modules: {},
     getters: {
-        getAllTiles: state => () => state.tiles
+        getAllTiles: state => () => state.tiles,
+        getAvailableTiles: state => () => state.availableTiles
     }
 })

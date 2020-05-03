@@ -17,7 +17,7 @@
                         style="display: block; margin: auto;"
                         class="pt-2"
                         link
-                        v-for="c in components"
+                        v-for="c in tiles"
                         v-bind:key="c.id"
                         @click="deleteTile(c.id)"
                     >
@@ -40,7 +40,7 @@ export default {
     },
     computed: {
         ...mapGetters(['getAllTiles']),
-        components() {
+        tiles() {
             return this.getAllTiles()
         }
     },

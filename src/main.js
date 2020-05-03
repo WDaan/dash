@@ -33,11 +33,25 @@ files.keys().map(key =>
     )
 )
 
+const availableTiles = require
+    .context('./components/Tiles', true, /\.vue$/i)
+    .keys()
+    .map(
+        key =>
+            key
+                .split('/')
+                .pop()
+                .split('.')[0]
+    )
+
 Vue.config.productionTip = false
 
 window.vue = new Vue({
     router,
     store,
     vuetify,
-    render: h => h(App)
+    render: h => h(App),
+    created() {
+        this.$store.commit('REGISTER_TILES', availableTiles)
+    }
 }).$mount('#app')

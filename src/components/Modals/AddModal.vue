@@ -44,6 +44,10 @@
                                 required
                             ></v-checkbox>
                         </div>
+                        <v-checkbox
+                            label="Only between certain times?"
+                            v-model="timed"
+                        ></v-checkbox>
                     </v-container>
                     <v-btn
                         :disabled="!valid"
@@ -58,35 +62,29 @@
 </template>
 
 <script>
-import Vue from 'vue'
-//tiles
-import HelloTile from '@/components/Tiles/HelloTile'
-import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
-import TrainTile from '@/components/Tiles/TrainTile'
-import PlexTile from '@/components/Tiles/PlexTile'
-
-//register all components
-const files = require.context('@/components/Tiles', true, /\.vue$/i)
-const components = files.keys().map(
-    key =>
-        key
-            .split('/')
-            .pop()
-            .split('.')[0]
-)
-
+import TileStore from '@/mixins/TileStore'
+import { mapGetters } from 'vuex'
 export default {
+    name: 'AddModal',
+    mixins: [TileStore],
     data() {
         return {
             dialog: false,
             options: [],
             schema: [],
             selectedTile: null,
-            valid: false
+            valid: false,
+            timed: false
+        }
+    },
+    computed: {
+        ...mapGetters(['getAvailableTiles']),
+        availableTiles() {
+            return this.getAvailableTiles()
         }
     },
     created() {
-        this.options = [...components]
+        this.options = [...this.availableTiles]
         this.selectedTile = this.options[0]
         this.createFormSchema(this.selectedTile)
     },
@@ -106,64 +104,6 @@ export default {
                     value: props[key].default
                 })
             })
-        },
-        createAndMountComponent() {
-            //get props
-            let propsData = {}
-            this.schema.forEach(el => {
-                propsData[el.name] = el.value
-            })
-
-            //require component
-            let ComponentClass = this.requireTile(this.selectedTile)
-
-            //instantiate
-            let instance = new ComponentClass({
-                propsData
-            })
-            instance.$mount()
-            //add to dom
-            document.getElementById('dashboard').appendChild(instance.$el)
-
-            this.saveComponentToStore(instance)
-
-            //close dialog
-            this.dialog = false
-
-            //reset inputs
-            this.schema = []
-            this.createFormSchema(this.selectedTile)
-
-            //success notification
-            this.$toast.success('Tile added successfully')
-        },
-        requireTile(name) {
-            switch (name) {
-                case 'HelloTile':
-                    return Vue.extend(HelloTile)
-                case 'TimeWeatherTile':
-                    return Vue.extend(TimeWeatherTile)
-                case 'TrainTile':
-                    return Vue.extend(TrainTile)
-                case 'PlexTile':
-                    return Vue.extend(PlexTile)
-                default:
-                    return
-            }
-        },
-        saveComponentToStore(tile) {
-            console.log(tile)
-            let props = tile.$options.props
-            let state = {
-                id: tile._uid,
-                tileName: tile.$options.name
-            }
-            Object.keys(props).forEach(key => {
-                state[key] = tile[key]
-            })
-
-            //add to store
-            this.$store.commit('ADD_TILE', state)
         }
     }
 }
