@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Dashboard theme="">
+        <Dashboard theme>
             <HelloTile name="Daan" position="a1"></HelloTile>
             <TimeWeatherTile
                 position="b1:c1"
@@ -9,11 +9,7 @@
                 weather-city="gavere"
             ></TimeWeatherTile>
             <TileTimer on="12:00" off="19:00">
-                <TrainTile
-                    position="a2:b2"
-                    to="kortrijk"
-                    from="Gent"
-                ></TrainTile>
+                <TrainTile position="a2:b2" to="kortrijk" from="Gent"></TrainTile>
             </TileTimer>
         </Dashboard>
     </div>
@@ -21,19 +17,11 @@
 
 <script>
 import Dashboard from '@/components/Dashboard'
-import TileTimer from '@/components/TileTimer'
-import HelloTile from '@/components/Tiles/HelloTile'
-import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
-import TrainTile from '@/components/Tiles/TrainTile'
 
 export default {
     name: 'Home',
     components: {
-        Dashboard,
-        TileTimer,
-        HelloTile,
-        TimeWeatherTile,
-        TrainTile
+        Dashboard
     },
     data() {
         return {

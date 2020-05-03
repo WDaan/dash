@@ -31,14 +31,10 @@
 
 <script>
 import { emoji } from '../../helpers'
-import Tile from '../Tile'
 import moment from 'moment-timezone'
 import weather from '@/services/weather/Weather'
 export default {
     name: 'TimeWeatherTile',
-    components: {
-        Tile
-    },
     props: {
         weatherCity: {
             type: String

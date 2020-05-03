@@ -9,10 +9,8 @@
 </template>
 
 <script>
-import Tile from '@/components/Tile'
 export default {
     name: 'HelloTile',
-    components: { Tile },
     props: {
         name: {
             type: String,

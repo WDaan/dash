@@ -1,5 +1,5 @@
 <template>
-    <tile :position="position">
+    <Tile :position="position">
         <div v-if="fromTrains && toTrains">
             <div class=" w-10 h-10 rounded-full mx-auto">
                 <div class="text-3xl -mt-1" v-html="emoji('🚃')" />
@@ -17,20 +17,14 @@
                 :trains="toTrains"
             ></TrainTilePartial>
         </div>
-    </tile>
+    </Tile>
 </template>
 
 <script>
 import { emoji } from '@/helpers'
-import Tile from '@/components/Tile'
-import TrainTilePartial from '@/components/Tiles/TrainTilePartial'
 import iRail from '@/services/trains/iRail'
 
 export default {
-    components: {
-        Tile,
-        TrainTilePartial
-    },
     props: {
         position: {
             type: String
