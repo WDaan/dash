@@ -4,17 +4,26 @@
             <template v-slot:activator="{ on }">
                 <v-list-item link v-on="on">
                     <v-icon class="pr-2 white--text">add</v-icon>
-                    <v-list-item-title class="white--text" style="font-size:15px">Add Tile</v-list-item-title>
+                    <v-list-item-title
+                        class="white--text"
+                        style="font-size:15px"
+                        >Add Tile</v-list-item-title
+                    >
                 </v-list-item>
             </template>
 
             <v-card>
-                <v-form v-model="valid" class="pa-5 pt-10 mx-auto" style="max-width: 300px;">
+                <v-form
+                    v-model="valid"
+                    class="pa-5 pt-10 mx-auto"
+                    style="max-width: 300px;"
+                >
                     <v-select
                         :items="options"
                         label="Tile"
                         :value="selectedTile"
                         @input="createFormSchema"
+                        v-model="selectedTile"
                         solo
                     ></v-select>
                     <v-container class="pb-10">
@@ -40,7 +49,8 @@
                         :disabled="!valid"
                         @click="createAndMountComponent"
                         color="teal accent-4 white--text"
-                    >Add Tile</v-btn>
+                        >Add Tile</v-btn
+                    >
                 </v-form>
             </v-card>
         </v-dialog>
@@ -48,12 +58,13 @@
 </template>
 
 <script>
+import Vue from 'vue'
+//tiles
 import HelloTile from '@/components/Tiles/HelloTile'
 import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
 import TrainTile from '@/components/Tiles/TrainTile'
 import PlexTile from '@/components/Tiles/PlexTile'
 
-import Vue from 'vue'
 //register all components
 const files = require.context('@/components/Tiles', true, /\.vue$/i)
 const components = files.keys().map(
@@ -92,7 +103,7 @@ export default {
                     name: key,
                     type: props[key].type.name.toLowerCase(),
                     label: props[key].label,
-                    value: null
+                    value: props[key].default
                 })
             })
         },
@@ -114,8 +125,17 @@ export default {
             //add to dom
             document.getElementById('dashboard').appendChild(instance.$el)
 
+            this.saveComponentToStore(instance)
+
             //close dialog
             this.dialog = false
+
+            //reset inputs
+            this.schema = []
+            this.createFormSchema(this.selectedTile)
+
+            //success notification
+            this.$toast.success('Tile added successfully')
         },
         requireTile(name) {
             switch (name) {
@@ -130,6 +150,20 @@ export default {
                 default:
                     return
             }
+        },
+        saveComponentToStore(tile) {
+            console.log(tile)
+            let props = tile.$options.props
+            let state = {
+                id: tile._uid,
+                tileName: tile.$options.name
+            }
+            Object.keys(props).forEach(key => {
+                state[key] = tile[key]
+            })
+
+            //add to store
+            this.$store.commit('ADD_TILE', state)
         }
     }
 }

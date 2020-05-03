@@ -6,6 +6,7 @@
     >
         <v-list dense rounded class="teal accent-4">
             <AddModal></AddModal>
+            <DeleteModal></DeleteModal>
         </v-list>
     </v-card>
 </template>

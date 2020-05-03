@@ -3,10 +3,15 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import VueTailwind from 'vue-tailwind'
 import vuetify from './plugins/vuetify'
 import '@babel/polyfill'
 
+import Toast from 'vue-toastification'
+// Import the CSS or use your own!
+import 'vue-toastification/dist/index.css'
+Vue.use(Toast)
+
+import VueTailwind from 'vue-tailwind'
 Vue.use(VueTailwind)
 
 /**
