@@ -8,7 +8,8 @@
             <AddModal></AddModal>
             <DeleteModal></DeleteModal>
             <v-list-item @click="toggleTheme" link>
-                <v-icon class="pr-2 white--text">brightness_7</v-icon>
+                <v-icon v-if="theme === 'Light'" class="pr-2 white--text">brightness_7</v-icon>
+                <v-icon v-else class="pr-2 white--text">brightness_2</v-icon>
                 <v-list-item-title class="white--text" style="font-size:15px">{{
                     theme
                 }}</v-list-item-title>
@@ -24,7 +25,7 @@ export default {
     computed: {
         ...mapGetters(['getTheme']),
         theme() {
-            return this.getTheme() ? 'Light' : 'Dark'
+            return !this.getTheme() ? 'Light' : 'Dark'
         }
     },
     methods: {
