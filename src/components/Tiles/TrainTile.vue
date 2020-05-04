@@ -1,11 +1,11 @@
 <template>
-    <Tile :id="tileId" :position="position" @resize="getSize">
+    <Tile :id="tileId" :position="position">
         <div v-if="fromTrains && toTrains">
             <div class=" w-10 h-10 rounded-full mx-auto">
                 <div class="text-3xl -mt-1" v-html="emoji('🚃')" />
             </div>
         </div>
-        <div :class="size > 450 ? 'flex flex-row' : ''">
+        <div :class="size.width > 450 ? 'flex flex-row' : ''">
             <TrainTilePartial
                 :from="from"
                 :to="to"
@@ -40,8 +40,7 @@ export default {
             toTrains: null,
             fromTrainsApi: null,
             toTrainsApi: null,
-            getTrainDataInterval: null,
-            size: 500
+            getTrainDataInterval: null
         }
     },
     created() {
@@ -53,9 +52,6 @@ export default {
             this.getTrainData,
             1000 * 60 * 10
         ) //10minutes
-    },
-    mounted() {
-        this.getSize()
     },
     methods: {
         emoji,
@@ -69,9 +65,6 @@ export default {
             } catch (e) {
                 clearInterval(this.getTrainDataInterval)
             }
-        },
-        getSize() {
-            this.size = this.$el.clientWidth
         }
     }
 }

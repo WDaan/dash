@@ -15,7 +15,8 @@ export default new Vuex.Store({
     plugins: [vuexPersist.plugin],
     state: {
         tiles: [],
-        availableTiles: []
+        availableTiles: [],
+        theme: true
     },
     mutations: {
         ADD_TILE(state, tile) {
@@ -26,12 +27,16 @@ export default new Vuex.Store({
         },
         REGISTER_TILES(state, tiles) {
             state.availableTiles = [...tiles]
+        },
+        TOGGLE_THEME(state) {
+            state.theme = !state.theme
         }
     },
     actions: {},
     modules: {},
     getters: {
         getAllTiles: state => () => state.tiles,
-        getAvailableTiles: state => () => state.availableTiles
+        getAvailableTiles: state => () => state.availableTiles,
+        getTheme: state => () => state.theme
     }
 })

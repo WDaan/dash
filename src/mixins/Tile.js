@@ -2,7 +2,10 @@ export default {
     props: { position: String, id: Number },
     data() {
         return {
-            size: null
+            size: {
+                height: 200,
+                width: 200
+            }
         }
     },
     computed: {

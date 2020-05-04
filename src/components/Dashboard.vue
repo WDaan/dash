@@ -2,7 +2,7 @@
     <div
         style="padding: 7px; background-color: var(--bg-screen)"
         class="grid gap-spacing h-screen p-2"
-        :class="theme"
+        :class="theme ? '' : 'dark'"
     >
         <slot></slot>
     </div>
@@ -23,7 +23,7 @@ export default {
     name: 'Dashboard',
     mixins: [TileStore],
     props: {
-        theme: String
+        theme: Boolean
     },
     computed: {
         ...mapGetters(['getAllTiles']),
@@ -41,6 +41,7 @@ export default {
                 this.mountComponent(instance)
             })
         }
+        console.log(this.$root)
     }
 }
 </script>
