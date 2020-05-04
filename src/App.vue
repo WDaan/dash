@@ -1,14 +1,11 @@
 <template>
-    <div id="app">
-        <v-app>
-            <v-content>
-                <router-view />
-            </v-content>
-            <Menu />
-        </v-app>
-    </div>
+    <v-app>
+        <Menu/>
+        <v-content>
+            <router-view />
+        </v-content>
+    </v-app>
 </template>
-
 <style>
 ::-webkit-scrollbar {
     display: none;
@@ -18,6 +15,9 @@
 <script>
 import '@/assets/main.css'
 export default {
-    name: 'App'
+    name: 'App',
+    data: () => ({
+        drawer: null
+    })
 }
 </script>

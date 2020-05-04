@@ -15,7 +15,7 @@
                     :dark="theme"
                     elevation="20"
                     width="170"
-                    style="position:absolute; top: 60%; z-index: 10"
+                    style="position:absolute; top: 50%; z-index: 10; overflow: show"
                 >
                     <v-list dense rounded>
                         <EditModal :id="id"></EditModal>

@@ -2,14 +2,9 @@
     <div class="text-center">
         <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
-                <v-list-item link v-on="on">
-                    <v-icon class="pr-2 white--text">delete</v-icon>
-                    <v-list-item-title
-                        class="white--text"
-                        style="font-size:15px"
-                        >Delete Tile</v-list-item-title
-                    >
-                </v-list-item>
+                <v-btn small icon v-on="on">
+                    <v-icon class="white--text">delete</v-icon>
+                </v-btn>
             </template>
             <v-card :dark="theme">
                 <v-list v-if="tiles.length >= 1" dense rounded>

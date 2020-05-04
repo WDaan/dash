@@ -16,7 +16,7 @@
                         class="pa-5 pt-10 mx-auto"
                         style="max-width: 300px;"
                     >
-                        <TileForm :schema="schema" :timed="false"></TileForm>
+                        <TileForm :schema="schema"></TileForm>
                         <v-btn
                             :disabled="!valid"
                             @click="editTile"

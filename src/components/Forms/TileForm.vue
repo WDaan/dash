@@ -15,10 +15,6 @@
                 required
             ></v-checkbox>
         </div>
-        <v-checkbox
-            label="Only between certain times?"
-            v-model="timed"
-        ></v-checkbox>
     </div>
 </template>
 
@@ -26,8 +22,7 @@
 export default {
     name: 'TileForm',
     props: {
-        schema: Array,
-        timed: Boolean
+        schema: Array
     }
 }
 </script>

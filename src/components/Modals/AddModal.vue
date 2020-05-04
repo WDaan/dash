@@ -2,14 +2,9 @@
     <div class="text-center">
         <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
-                <v-list-item link v-on="on">
-                    <v-icon class="pr-2 white--text">add</v-icon>
-                    <v-list-item-title
-                        class="white--text"
-                        style="font-size:15px"
-                        >Add Tile</v-list-item-title
-                    >
-                </v-list-item>
+                <v-btn small icon v-on="on">
+                    <v-icon class="white--text">add</v-icon>
+                </v-btn>
             </template>
 
             <v-card :dark="theme">
@@ -27,7 +22,7 @@
                         solo
                     ></v-select>
                     <v-container class="pb-10">
-                        <TileForm :schema="schema" :timed="timed"></TileForm>
+                        <TileForm :schema="schema"></TileForm>
                     </v-container>
                     <v-btn
                         :disabled="!valid"
@@ -55,8 +50,7 @@ export default {
             dialog: false,
             options: [],
             schema: [],
-            selectedTile: null,
-            timed: false
+            selectedTile: null
         }
     },
     computed: {

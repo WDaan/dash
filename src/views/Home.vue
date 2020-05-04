@@ -1,11 +1,10 @@
 <template>
     <div>
-        <Dashboard ref="dashboard" id="dashboard" :theme="theme"> </Dashboard>
+        <Dashboard id="dashboard" :theme="theme"> </Dashboard>
     </div>
 </template>
 
 <script>
-import Dashboard from '@/components/Dashboard'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -15,9 +14,6 @@ export default {
         theme() {
             return this.getTheme()
         }
-    },
-    components: {
-        Dashboard
     }
 }
 </script>
