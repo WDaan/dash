@@ -17,7 +17,7 @@
                     style="position:absolute; top: 60%;"
                 >
                     <v-list dense rounded>
-                        <EditModal></EditModal>
+                        <EditModal :id="id"></EditModal>
                         <v-list-item link @click.prevent="rightClickDelete(id)">
                             <v-icon>delete</v-icon>
                             <v-list-item-title style="font-size:15px"
@@ -74,7 +74,6 @@ export default {
             return index < 1 ? 1 : index
         },
         rightClickDelete(id) {
-            console.log(id)
             this.$store.commit('DELETE_TILE', id)
             this.$toast.success('Tile removed successfully!')
         }

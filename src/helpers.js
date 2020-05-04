@@ -8,3 +8,7 @@ export function emoji(character) {
 export function formatTime(value) {
     return moment(value, 'X').format('HH:mm')
 }
+
+export function getRandomNumber() {
+    return Math.floor(Math.random() * Math.floor(9999))
+}

@@ -4,12 +4,20 @@
             <template v-slot:activator="{ on }">
                 <v-list-item link v-on="on">
                     <v-icon class="pr-2 white--text">add</v-icon>
-                    <v-list-item-title class="white--text" style="font-size:15px">Add Tile</v-list-item-title>
+                    <v-list-item-title
+                        class="white--text"
+                        style="font-size:15px"
+                        >Add Tile</v-list-item-title
+                    >
                 </v-list-item>
             </template>
 
             <v-card>
-                <v-form v-model="valid" class="pa-5 pt-10 mx-auto" style="max-width: 300px;">
+                <v-form
+                    v-model="valid"
+                    class="pa-5 pt-10 mx-auto"
+                    style="max-width: 300px;"
+                >
                     <v-select
                         :items="options"
                         label="Tile"
@@ -23,9 +31,10 @@
                     </v-container>
                     <v-btn
                         :disabled="!valid"
-                        @click="createComponentFromMenu"
+                        @click="createTileFromMenu"
                         color="teal accent-4 white--text"
-                    >Add Tile</v-btn>
+                        >Add Tile</v-btn
+                    >
                 </v-form>
             </v-card>
         </v-dialog>
@@ -35,6 +44,7 @@
 <script>
 import TileStore from '@/mixins/TileStore'
 import { mapGetters } from 'vuex'
+import { getRandomNumber } from '@/helpers'
 
 export default {
     name: 'AddModal',
@@ -45,7 +55,6 @@ export default {
             options: [],
             schema: [],
             selectedTile: null,
-            valid: false,
             timed: false
         }
     },
@@ -61,12 +70,11 @@ export default {
         this.createFormSchema(this.selectedTile)
     },
     methods: {
-        createComponentFromMenu() {
+        createTileFromMenu() {
             let props = this.formatProps()
-            let { position } = props
 
             this.saveComponentToStore({
-                id: this.selectedTile + position,
+                id: this.selectedTile + getRandomNumber(),
                 tileName: this.selectedTile,
                 props
             })
@@ -80,14 +88,6 @@ export default {
 
             //success notification
             this.$toast.success('Tile added successfully')
-        },
-        formatProps() {
-            let propsData = {}
-            this.schema.forEach(el => {
-                propsData[el.name] = el.value
-            })
-
-            return propsData
         }
     }
 }

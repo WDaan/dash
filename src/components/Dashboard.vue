@@ -8,7 +8,7 @@
             v-for="tile in tiles"
             v-bind:key="tile.id"
             :is="tile.tileName"
-            v-bind="tile.props"
+            v-bind="{ tileId: tile.id, ...tile.props }"
         ></component>
     </div>
 </template>

@@ -10,7 +10,8 @@ import PlexTile from '@/components/Tiles/PlexTile'
 export default {
     data() {
         return {
-            schema: []
+            schema: [],
+            valid: false
         }
     },
     methods: {
@@ -46,7 +47,7 @@ export default {
             const component = this.$root.$options.components[ComponentName]
             return component.options.props
         },
-        createFormSchema(ComponentName) {
+        createFormSchema(ComponentName, tile) {
             this.schema = []
             let props = this.getProps(ComponentName)
             Object.keys(props).forEach(key => {
@@ -54,9 +55,17 @@ export default {
                     name: key,
                     type: props[key].type.name.toLowerCase(),
                     label: props[key].label,
-                    value: props[key].default
+                    value: tile?.props[key] ?? props[key].default
                 })
             })
+        },
+        formatProps() {
+            let propsData = {}
+            this.schema.forEach(el => {
+                propsData[el.name] = el.value
+            })
+
+            return propsData
         }
     }
 }

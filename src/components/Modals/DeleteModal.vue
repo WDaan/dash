@@ -12,7 +12,7 @@
                 </v-list-item>
             </template>
             <v-card>
-                <v-list v-if="tiles.length > 0" dense rounded>
+                <v-list v-if="tiles.length >= 1" dense rounded>
                     <v-list-item
                         style="display: block; margin: auto;"
                         class="pt-2"

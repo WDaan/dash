@@ -10,7 +10,7 @@ export default {
     },
     computed: {
         tileId() {
-            return this.id ?? this.$options.name + this.position
+            return this.$attrs.tileId
         }
     },
     mounted() {

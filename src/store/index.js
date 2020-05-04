@@ -25,6 +25,10 @@ export default new Vuex.Store({
         DELETE_TILE(state, id) {
             state.tiles = state.tiles.filter(el => el.id !== id)
         },
+        EDIT_TILE(state, tile) {
+            let index = state.tiles.findIndex(el => el.id === tile.id)
+            state.tiles[index].props = tile.props
+        },
         REGISTER_TILES(state, tiles) {
             state.availableTiles = [...tiles]
         },
@@ -37,6 +41,7 @@ export default new Vuex.Store({
     getters: {
         getAllTiles: state => () => state.tiles,
         getAvailableTiles: state => () => state.availableTiles,
-        getTheme: state => () => state.theme
+        getTheme: state => () => state.theme,
+        getTileById: state => id => state.tiles.filter(el => el.id === id)[0]
     }
 })
