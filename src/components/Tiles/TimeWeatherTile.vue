@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import { emoji } from '../../helpers'
+import { emoji } from '@/helpers'
 import moment from 'moment-timezone'
-import weather from '@/services/weather/Weather'
+import Weather from '@/services/weather/Weather'
 import Tile from '@/mixins/Tile'
 export default {
     name: 'TimeWeatherTile',
@@ -53,6 +53,10 @@ export default {
         timeZone: {
             type: String,
             default: 'Europe/Brussels'
+        },
+        token: {
+            type: String,
+            default: null
         }
     },
     data() {
@@ -63,14 +67,18 @@ export default {
                 temperature: '',
                 icons: []
             },
-            rainForecasts: []
+            rainForecasts: [],
+            weatherApi: null
         }
     },
     created() {
+        this.weatherApi = new Weather(this.token)
         this.refreshTime()
         setInterval(this.refreshTime, 5000)
-        this.fetchWeather()
-        setInterval(this.fetchWeather, 15 * 60 * 1000)
+        if (this.weatherApi) {
+            this.fetchWeather()
+            setInterval(this.fetchWeather, 15 * 60 * 1000)
+        }
     },
     methods: {
         emoji,
@@ -90,13 +98,16 @@ export default {
             }
         },
         async fetchWeather() {
-            const condition = await weather.forCity(this.weatherCity)
+            const condition = await this.weatherApi.forCity(this.weatherCity)
             let icons = []
             condition.weather
                 .slice(0, 1) // There's not enough room for > 1 emoji -> only display the first weather condition
                 .forEach(weatherCondition => {
                     const isNight = weatherCondition.icon.includes('n')
-                    const icon = weather.getEmoji(weatherCondition.id, isNight)
+                    const icon = this.weatherApi.getEmoji(
+                        weatherCondition.id,
+                        isNight
+                    )
                     icons.push(emoji(icon))
                 })
             this.weather.temperature = condition.main.temp.toFixed(1)

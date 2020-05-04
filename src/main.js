@@ -1,9 +1,9 @@
 import Vue from 'vue'
-import App from './App.vue'
-import './registerServiceWorker'
-import router from './router'
-import store from './store'
-import vuetify from './plugins/vuetify'
+import App from '@/App.vue'
+import '@/registerServiceWorker'
+import router from '@/router'
+import store from '@/store'
+import vuetify from '@/plugins/vuetify'
 import '@babel/polyfill'
 
 import Toast from 'vue-toastification'
@@ -22,7 +22,7 @@ Vue.use(VueTailwind)
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-const files = require.context('./components/', true, /\.vue$/i)
+const files = require.context('@/components/', true, /\.vue$/i)
 files.keys().map(key =>
     Vue.component(
         key
@@ -34,7 +34,7 @@ files.keys().map(key =>
 )
 
 const availableTiles = require
-    .context('./components/Tiles', true, /\.vue$/i)
+    .context('@/components/Tiles', true, /\.vue$/i)
     .keys()
     .map(
         key =>

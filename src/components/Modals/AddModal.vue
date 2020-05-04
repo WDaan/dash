@@ -12,7 +12,7 @@
                 </v-list-item>
             </template>
 
-            <v-card>
+            <v-card :dark="theme">
                 <v-form
                     v-model="valid"
                     class="pa-5 pt-10 mx-auto"
@@ -43,12 +43,13 @@
 
 <script>
 import TileStore from '@/mixins/TileStore'
+import DarkMode from '@/mixins/DarkMode'
 import { mapGetters } from 'vuex'
 import { getRandomNumber } from '@/helpers'
 
 export default {
     name: 'AddModal',
-    mixins: [TileStore],
+    mixins: [TileStore, DarkMode],
     data() {
         return {
             dialog: false,

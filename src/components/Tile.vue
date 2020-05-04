@@ -12,6 +12,7 @@
             <slot></slot>
             <vue-context ref="menu">
                 <v-card
+                    :dark="theme"
                     elevation="20"
                     width="170"
                     style="position:absolute; top: 60%; z-index: 10"
@@ -32,10 +33,12 @@
 </template>
 <script>
 import { VueContext } from 'vue-context'
+import DarkMode from '@/mixins/DarkMode'
 
 export default {
     name: 'Tile',
     components: { VueContext },
+    mixins: [DarkMode],
     props: {
         id: String,
         position: {

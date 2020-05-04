@@ -11,7 +11,7 @@
                     >
                 </v-list-item>
             </template>
-            <v-card>
+            <v-card :dark="theme">
                 <v-list v-if="tiles.length >= 1" dense rounded>
                     <v-list-item
                         style="display: block; margin: auto;"
@@ -34,8 +34,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import DarkMode from '@/mixins/DarkMode'
 export default {
     name: 'DeleteModal',
+    mixins: [DarkMode],
     data() {
         return {
             dialog: false

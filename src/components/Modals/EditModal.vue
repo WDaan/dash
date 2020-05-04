@@ -9,7 +9,7 @@
                     >
                 </v-list-item>
             </template>
-            <v-card>
+            <v-card :dark="theme">
                 <v-list v-if="tile" dense rounded>
                     <v-form
                         v-model="valid"
@@ -35,13 +35,14 @@
 
 <script>
 import TileStore from '@/mixins/TileStore'
+import DarkMode from '@/mixins/DarkMode'
 import { mapGetters } from 'vuex'
 export default {
     name: 'DeleteModal',
     props: {
         id: String
     },
-    mixins: [TileStore],
+    mixins: [TileStore, DarkMode],
     data() {
         return {
             dialog: false

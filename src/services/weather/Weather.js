@@ -1,9 +1,13 @@
 import axios from 'axios'
 
-class Weather {
+export default class Weather {
+    constructor(token) {
+        this.token = token
+    }
+
     async forCity(city) {
         const response = await axios.get(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${process.env.VUE_APP_OPEN_WEATHER_MAP_KEY}&units=metric`
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${this.token}&units=metric`
         )
 
         return response.data
@@ -55,5 +59,3 @@ class Weather {
         return '🧐'
     }
 }
-
-export default new Weather()
