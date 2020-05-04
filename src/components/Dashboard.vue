@@ -35,7 +35,6 @@ export default {
         if (this.tiles.length) {
             this.tiles.forEach(tile => {
                 let { tileName } = tile
-                delete tile.tileName
 
                 let instance = this.createComponent(tileName, tile, this.$store)
 

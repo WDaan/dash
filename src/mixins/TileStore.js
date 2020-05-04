@@ -39,12 +39,12 @@ export default {
             }
         },
         saveComponentToStore(tile) {
-            console.log(tile)
             //get props
             let props = tile.$options.props
+            delete props.id
             //convert tile to json object
             let state = {
-                TileId: tile._data.id,
+                id: tile.tileId,
                 tileName: tile.$options.name
             }
             Object.keys(props).forEach(key => {

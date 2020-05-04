@@ -52,7 +52,7 @@ export default {
             type: Boolean,
             default: false
         },
-        vue: this
+        tileName: String
     },
     computed: {
         tilePosition() {
@@ -81,6 +81,7 @@ export default {
             return index < 1 ? 1 : index
         },
         rightClickDelete(id) {
+            console.log(id)
             this.$store.commit('DELETE_TILE', id)
             this.$toast.success('Tile removed successfully!')
         }

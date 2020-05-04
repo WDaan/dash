@@ -22,7 +22,7 @@ export default new Vuex.Store({
             state.tiles.push(tile)
         },
         DELETE_TILE(state, id) {
-            state.tiles = state.tiles.filter(el => el.TileId !== id)
+            state.tiles = state.tiles.filter(el => el.id !== id)
         },
         REGISTER_TILES(state, tiles) {
             state.availableTiles = [...tiles]
