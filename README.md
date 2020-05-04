@@ -22,12 +22,20 @@ Questions? Maybe it's in the [Wiki](https://github.com/WDaan/dash/wiki/)!
 ## Installation
 
   
+### Native
+run
+```
+npm run build
+```
+place dist folder on your webserver
 
-npm run build or with docker image
+### With Docker
+ [Docker Hub](https://hub.docker.com/repository/docker/wdaan/dash)
 
-  
+```
+docker run -d --name dash -p 80:80 wdaan/dash
+```
 
-(more explanation coming soon!)
 
 
 ## Development
