@@ -1,5 +1,5 @@
 export default {
-    props: { position: String, id: Number },
+    props: { position: String },
     data() {
         return {
             size: {
@@ -10,7 +10,7 @@ export default {
     },
     computed: {
         tileId() {
-            return this.id ?? this._uid
+            return this.id ?? this.$options.name + this.position
         }
     },
     mounted() {

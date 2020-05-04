@@ -21,7 +21,7 @@
                         v-bind:key="c.id"
                         @click="deleteTile(c.id)"
                     >
-                        {{ c.tileName }} - {{ c.position }}
+                        {{ c.tileName }} - {{ c.props.position }}
                     </v-list-item>
                 </v-list>
                 <div v-else class="pa-4">
@@ -50,7 +50,6 @@ export default {
     created() {},
     methods: {
         deleteTile(id) {
-            // document.getElementById(id).remove()
             this.$store.commit('DELETE_TILE', id)
 
             this.dialog = false

@@ -17,20 +17,12 @@
                     style="position:absolute; top: 60%;"
                 >
                     <v-list dense rounded>
-                        <v-list-item
-                            link
-                            @click.prevent="onClick($event.target.innerText)"
-                        >
-                            <v-icon>edit</v-icon>
-                            <v-list-item-title style="font-size:15px">
-                                Edit
-                            </v-list-item-title>
-                        </v-list-item>
+                        <EditModal></EditModal>
                         <v-list-item link @click.prevent="rightClickDelete(id)">
                             <v-icon>delete</v-icon>
-                            <v-list-item-title style="font-size:15px">
-                                Delete
-                            </v-list-item-title>
+                            <v-list-item-title style="font-size:15px"
+                                >Delete</v-list-item-title
+                            >
                         </v-list-item>
                     </v-list>
                 </v-card>
@@ -40,11 +32,12 @@
 </template>
 <script>
 import { VueContext } from 'vue-context'
+
 export default {
     name: 'Tile',
     components: { VueContext },
     props: {
-        id: Number,
+        id: String,
         position: {
             type: String
         },

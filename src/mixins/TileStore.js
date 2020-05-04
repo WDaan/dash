@@ -1,12 +1,18 @@
 //tiles
 import Vue from 'vue'
 
+/** TODO: this should happen dynamically or not at all */
 import HelloTile from '@/components/Tiles/HelloTile'
 import TimeWeatherTile from '@/components/Tiles/TimeWeatherTile'
 import TrainTile from '@/components/Tiles/TrainTile'
 import PlexTile from '@/components/Tiles/PlexTile'
 
 export default {
+    data() {
+        return {
+            schema: []
+        }
+    },
     methods: {
         createComponent(name, props, store) {
             //require component
@@ -17,12 +23,6 @@ export default {
                 propsData: props,
                 store
             })
-        },
-        mountComponent(component) {
-            component.$mount()
-
-            //add to dom
-            document.getElementById('dashboard').appendChild(component.$el)
         },
         requireTile(name) {
             switch (name) {
@@ -39,20 +39,24 @@ export default {
             }
         },
         saveComponentToStore(tile) {
-            //get props
-            let props = tile.$options.props
-            delete props.id
-            //convert tile to json object
-            let state = {
-                id: tile.tileId,
-                tileName: tile.$options.name
-            }
-            Object.keys(props).forEach(key => {
-                state[key] = tile[key]
-            })
-
             //add to store
-            this.$store.commit('ADD_TILE', state)
+            this.$store.commit('ADD_TILE', tile)
+        },
+        getProps(ComponentName) {
+            const component = this.$root.$options.components[ComponentName]
+            return component.options.props
+        },
+        createFormSchema(ComponentName) {
+            this.schema = []
+            let props = this.getProps(ComponentName)
+            Object.keys(props).forEach(key => {
+                this.schema.push({
+                    name: key,
+                    type: props[key].type.name.toLowerCase(),
+                    label: props[key].label,
+                    value: props[key].default
+                })
+            })
         }
     }
 }

@@ -4,20 +4,12 @@
             <template v-slot:activator="{ on }">
                 <v-list-item link v-on="on">
                     <v-icon class="pr-2 white--text">add</v-icon>
-                    <v-list-item-title
-                        class="white--text"
-                        style="font-size:15px"
-                        >Add Tile</v-list-item-title
-                    >
+                    <v-list-item-title class="white--text" style="font-size:15px">Add Tile</v-list-item-title>
                 </v-list-item>
             </template>
 
             <v-card>
-                <v-form
-                    v-model="valid"
-                    class="pa-5 pt-10 mx-auto"
-                    style="max-width: 300px;"
-                >
+                <v-form v-model="valid" class="pa-5 pt-10 mx-auto" style="max-width: 300px;">
                     <v-select
                         :items="options"
                         label="Tile"
@@ -27,34 +19,13 @@
                         solo
                     ></v-select>
                     <v-container class="pb-10">
-                        <div v-for="(item, key) in schema" v-bind:key="key">
-                            <v-text-field
-                                v-if="item.type === 'string'"
-                                v-model="item.value"
-                                :rules="[
-                                    v => !!v || `${item.name} is required`
-                                ]"
-                                required
-                                :label="item.name"
-                            ></v-text-field>
-                            <v-checkbox
-                                v-if="item.type === 'boolean'"
-                                :label="item.label"
-                                v-model="item.value"
-                                required
-                            ></v-checkbox>
-                        </div>
-                        <v-checkbox
-                            label="Only between certain times?"
-                            v-model="timed"
-                        ></v-checkbox>
+                        <TileForm :schema="schema" :timed="timed"></TileForm>
                     </v-container>
                     <v-btn
                         :disabled="!valid"
                         @click="createComponentFromMenu"
                         color="teal accent-4 white--text"
-                        >Add Tile</v-btn
-                    >
+                    >Add Tile</v-btn>
                 </v-form>
             </v-card>
         </v-dialog>
@@ -64,6 +35,7 @@
 <script>
 import TileStore from '@/mixins/TileStore'
 import { mapGetters } from 'vuex'
+
 export default {
     name: 'AddModal',
     mixins: [TileStore],
@@ -89,32 +61,15 @@ export default {
         this.createFormSchema(this.selectedTile)
     },
     methods: {
-        getProps(ComponentName) {
-            const component = this.$root.$options.components[ComponentName]
-            return component.options.props
-        },
-        createFormSchema(ComponentName) {
-            this.schema = []
-            let props = this.getProps(ComponentName)
-            Object.keys(props).forEach(key => {
-                this.schema.push({
-                    name: key,
-                    type: props[key].type.name.toLowerCase(),
-                    label: props[key].label,
-                    value: props[key].default
-                })
-            })
-        },
         createComponentFromMenu() {
-            let instance = this.createComponent(
-                this.selectedTile,
-                this.formatProps(),
-                this.$store
-            )
+            let props = this.formatProps()
+            let { position } = props
 
-            this.mountComponent(instance)
-
-            this.saveComponentToStore(instance)
+            this.saveComponentToStore({
+                id: this.selectedTile + position,
+                tileName: this.selectedTile,
+                props
+            })
 
             //close dialog
             this.dialog = false

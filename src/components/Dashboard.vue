@@ -4,7 +4,12 @@
         class="grid gap-spacing h-screen p-2"
         :class="theme ? '' : 'dark'"
     >
-        <slot></slot>
+        <component
+            v-for="tile in tiles"
+            v-bind:key="tile.id"
+            :is="tile.tileName"
+            v-bind="tile.props"
+        ></component>
     </div>
 </template>
 
@@ -18,7 +23,6 @@
 <script>
 import { mapGetters } from 'vuex'
 import TileStore from '@/mixins/TileStore'
-
 export default {
     name: 'Dashboard',
     mixins: [TileStore],
@@ -30,18 +34,6 @@ export default {
         tiles() {
             return this.getAllTiles()
         }
-    },
-    mounted() {
-        if (this.tiles.length) {
-            this.tiles.forEach(tile => {
-                let { tileName } = tile
-
-                let instance = this.createComponent(tileName, tile, this.$store)
-
-                this.mountComponent(instance)
-            })
-        }
-        console.log(this.$root)
     }
 }
 </script>

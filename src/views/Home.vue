@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Dashboard id="dashboard" :theme="theme"> </Dashboard>
+        <Dashboard ref="dashboard" id="dashboard" :theme="theme"> </Dashboard>
     </div>
 </template>
 
