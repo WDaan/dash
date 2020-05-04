@@ -2,7 +2,7 @@
     <div
         :style="tilePosition"
         class="grid overflow-hidden rounded"
-        style="background-color: var(--bg-tile); position:relative"
+        style="background-color: var(--bg-tile); position:relative;"
         @contextmenu.prevent="$refs.menu.open"
     >
         <div
@@ -14,7 +14,7 @@
                 <v-card
                     elevation="20"
                     width="170"
-                    style="position:absolute; top: 60%;"
+                    style="position:absolute; top: 60%; z-index: 10"
                 >
                     <v-list dense rounded>
                         <EditModal :id="id"></EditModal>

@@ -2,7 +2,7 @@
     <v-card
         elevation="20"
         width="170"
-        style="position:fixed; bottom: 15px; right: 15px; "
+        style="position:fixed; bottom: 15px; right: 15px; z-index: 1"
     >
         <v-list dense rounded class="teal accent-4">
             <AddModal></AddModal>
