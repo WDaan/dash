@@ -1,5 +1,5 @@
 <template>
-    <Tile :id="id" :position="position" no-fade>
+    <Tile :id="tileId" :position="position" no-fade>
         <div
             class="grid gap-2 justify-items-center h-full"
             style="grid-template-rows: auto 1fr auto;"

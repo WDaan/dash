@@ -1,5 +1,5 @@
 <template>
-    <Tile :id="id" :position="position">
+    <Tile :id="tileId" :position="position">
         <h1>
             Plex
             <span style="font-size:20px;" class="text-dimmed">{{ name }}</span>
@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import Tile from '@/components/Tile'
 import Plex from '@/services/plex/Plex'
+import Tile from '@/mixins/Tile'
 export default {
     name: 'PlexTile',
-    components: { Tile },
+    mixins: [Tile],
     props: {
         name: { type: String, default: '' },
         port: Number,
