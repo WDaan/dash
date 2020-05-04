@@ -44,7 +44,7 @@ export default {
         },
         dateFormat: {
             type: String,
-            default: 'DD-MM-YYYY'
+            default: 'ddd DD/MM'
         },
         timeFormat: {
             type: String,
