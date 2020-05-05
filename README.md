@@ -25,9 +25,8 @@ Questions? Maybe it's in the [Wiki](https://github.com/WDaan/dash/wiki/)!
 ### Native
 run
 ```
-npm run build
+npm run build && npm run start
 ```
-place dist folder on your webserver
 
 ### With Docker
  [Docker Hub](https://hub.docker.com/repository/docker/wdaan/dash)
