@@ -4,7 +4,7 @@ A minimal, customizable dashboard made with Vuejs!
 
   
 
-> Vue, Tailwind
+> Vue, Tailwind, Vuetify
 
   
 
