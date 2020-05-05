@@ -6,6 +6,7 @@
                     v-model="valid"
                     class="pa-5 pt-10 mx-auto"
                     style="max-width: 300px;"
+                    @keyup.enter.native="createTileFromMenu"
                 >
                     <v-select
                         :items="options"
@@ -73,7 +74,6 @@ export default {
 
             //reset inputs
             this.schema = []
-            this.createFormSchema(this.selectedTile)
 
             //success notification
             this.$toast.success('Tile added successfully')

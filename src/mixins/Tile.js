@@ -14,6 +14,7 @@ export default {
         }
     },
     mounted() {
+        this.resize()
         window.addEventListener('resize', this.resize)
     },
     beforeDestroy() {

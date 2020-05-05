@@ -1,11 +1,14 @@
 <template>
     <Tile :id="tileId" :position="position">
-        <div v-if="fromTrains && toTrains">
+        <div>
             <div class=" w-10 h-10 rounded-full mx-auto">
                 <div class="text-3xl -mt-1" v-html="emoji('🚃')" />
             </div>
         </div>
-        <div :class="size.width > 450 ? 'flex flex-row' : ''">
+        <div
+            v-if="fromTrains && toTrains"
+            :class="size.width > 450 ? 'flex flex-row' : ''"
+        >
             <TrainTilePartial
                 :from="from"
                 :to="to"
