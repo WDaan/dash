@@ -6,7 +6,9 @@
                 v-model="item.value"
                 :rules="[v => !!v || `${item.name} is required`]"
                 required
-                :label="item.name"
+                :label="
+                    item.name === 'position' ? 'position: e.g. a1:b1' : item.name
+                "
             ></v-text-field>
             <v-checkbox
                 v-if="item.type === 'boolean'"

@@ -74,6 +74,8 @@ export default {
 
             //reset inputs
             this.schema = []
+            this.selectedTile = this.options[0]
+            this.createFormSchema(this.selectedTile)
 
             //success notification
             this.$toast.success('Tile added successfully')
