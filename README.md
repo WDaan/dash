@@ -10,7 +10,7 @@ A minimal, customizable dashboard made with Vuejs!
 
 Questions? Maybe it's in the [Wiki](https://github.com/WDaan/dash/wiki/)!
 
-  
+[Demo](https://wdaan.herokuapp.com/)
 
 ## Screenshots
   
