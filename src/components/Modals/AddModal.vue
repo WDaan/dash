@@ -1,12 +1,6 @@
 <template>
     <div class="text-center">
         <v-dialog v-model="dialog" width="500">
-            <template v-slot:activator="{ on }">
-                <v-btn small icon v-on="on">
-                    <v-icon class="white--text">add</v-icon>
-                </v-btn>
-            </template>
-
             <v-card :dark="theme">
                 <v-form
                     v-model="valid"
@@ -39,15 +33,15 @@
 <script>
 import TileStore from '@/mixins/TileStore'
 import DarkMode from '@/mixins/DarkMode'
+import Modal from '@/mixins/Modal'
 import { mapGetters } from 'vuex'
 import { getRandomNumber } from '@/helpers'
 
 export default {
     name: 'AddModal',
-    mixins: [TileStore, DarkMode],
+    mixins: [TileStore, DarkMode, Modal],
     data() {
         return {
-            dialog: false,
             options: [],
             schema: [],
             selectedTile: null

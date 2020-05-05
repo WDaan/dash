@@ -1,7 +1,13 @@
 <template>
     <v-app>
-        <Menu/>
+        <SideMenu v-if="menuType === 'SideMenu'" />
+        <MenuButton v-if="menuType === 'MenuButton'" />
+        <MenuButtonSmall v-if="menuType === 'MenuButtonSmall'" />
+        <MenuCard v-if="menuType === 'MenuCard'" />
         <v-content>
+            <AddModal />
+            <DeleteModal />
+            <SettingsModal />
             <router-view />
         </v-content>
     </v-app>
@@ -14,10 +20,14 @@
 
 <script>
 import '@/assets/main.css'
+import { mapGetters } from 'vuex'
 export default {
     name: 'App',
-    data: () => ({
-        drawer: null
-    })
+    computed: {
+        ...mapGetters(['getMenuType']),
+        menuType() {
+            return this.getMenuType()
+        }
+    }
 }
 </script>

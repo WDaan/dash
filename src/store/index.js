@@ -16,7 +16,13 @@ export default new Vuex.Store({
     state: {
         tiles: [],
         availableTiles: [],
-        theme: true
+        theme: true,
+        menutype: 'MenuCard',
+        modals: {
+            addmodal: false,
+            deletemodal: false,
+            settingsmodal: false
+        }
     },
     mutations: {
         ADD_TILE(state, tile) {
@@ -34,6 +40,14 @@ export default new Vuex.Store({
         },
         TOGGLE_THEME(state) {
             state.theme = !state.theme
+        },
+        TOGGLE_MODAL(state, modal) {
+            state.modals[modal.toLowerCase()] = !state.modals[
+                modal.toLowerCase()
+            ]
+        },
+        SET_MENU_TYPE(state, type) {
+            state.menutype = type
         }
     },
     actions: {},
@@ -42,6 +56,8 @@ export default new Vuex.Store({
         getAllTiles: state => () => state.tiles,
         getAvailableTiles: state => () => state.availableTiles,
         getTheme: state => () => state.theme,
-        getTileById: state => id => state.tiles.filter(el => el.id === id)[0]
+        getTileById: state => id => state.tiles.filter(el => el.id === id)[0],
+        getModalState: state => name => state.modals[name.toLowerCase()],
+        getMenuType: state => () => state.menutype
     }
 })

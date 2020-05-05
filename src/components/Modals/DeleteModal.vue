@@ -1,11 +1,6 @@
 <template>
     <div class="text-center">
         <v-dialog v-model="dialog" width="500">
-            <template v-slot:activator="{ on }">
-                <v-btn small icon v-on="on">
-                    <v-icon class="white--text">delete</v-icon>
-                </v-btn>
-            </template>
             <v-card :dark="theme">
                 <v-list v-if="tiles.length >= 1" dense rounded>
                     <v-list-item
@@ -30,14 +25,10 @@
 <script>
 import { mapGetters } from 'vuex'
 import DarkMode from '@/mixins/DarkMode'
+import Modal from '@/mixins/Modal'
 export default {
     name: 'DeleteModal',
-    mixins: [DarkMode],
-    data() {
-        return {
-            dialog: false
-        }
-    },
+    mixins: [DarkMode, Modal],
     computed: {
         ...mapGetters(['getAllTiles']),
         tiles() {
