@@ -52,7 +52,6 @@ export default {
     mixins: [Tile],
     props: {
         name: { type: String, default: '' },
-        port: Number,
         host: String,
         token: String,
         position: String,

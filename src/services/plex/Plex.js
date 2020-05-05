@@ -1,11 +1,10 @@
 import axios from 'axios'
 // media
 export default class Plex {
-    constructor({ host, port, token }) {
+    constructor({ host, token }) {
         this.host = host
-        this.port = port
         this.token = token
-        this.url = `${host}:${port}/status/sessions?X-Plex-Token=${token}`
+        this.url = `${host}/status/sessions?X-Plex-Token=${token}`
     }
 
     async getNumberOfStreams() {
@@ -26,7 +25,7 @@ export default class Plex {
                 name: el.grandparentTitle,
                 episode: `S${this.pad(el.parentIndex)}E${this.pad(el.index)}`
             },
-            art: `${this.host}:${this.port}${el.art}?X-Plex-Token=${this.token}`
+            art: `${this.host}${el.art}?X-Plex-Token=${this.token}`
         }
     }
 
@@ -34,7 +33,7 @@ export default class Plex {
         return {
             type: el.type,
             name: el.title,
-            art: `${this.host}:${this.port}${el.art}?X-Plex-Token=${this.token}`
+            art: `${this.host}${el.art}?X-Plex-Token=${this.token}`
         }
     }
 
